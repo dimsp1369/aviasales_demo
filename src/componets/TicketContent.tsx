@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, CardContent, Grid, Typography} from "@mui/material";
+import {Box, Grid, Typography} from "@mui/material";
 import {ITicketSegment} from "../types/types";
 
 interface TicketSegmentProps {
