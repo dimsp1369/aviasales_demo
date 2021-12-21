@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {Card, CardContent, CardHeader, Checkbox, FormControlLabel, FormGroup} from "@mui/material";
+import {Card, Checkbox, FormControlLabel, FormGroup, Typography} from "@mui/material";
 import {v4 as uuidv4} from "uuid";
 import {ITicket} from "../types/types";
 
@@ -51,16 +51,14 @@ const CheckBoxFilter: FC<CheckBosFilterProps> = ({tickets, setFilteredList}) => 
     }
 
     return (
-        <Card sx={{width: 230, maxHeight: 250}}>
-            <CardHeader title={'STOPS'}/>
-            <CardContent>
-                <FormGroup>
+        <Card className={'Filter'}>
+            <Typography className={'Filter__Title'} variant={'body1'}>Stops</Typography>
+                <FormGroup className={'Filter__CheckBox'}>
                     {filter.map(({value, isChecked}) => <FormControlLabel
                         control={<Checkbox name={value} checked={isChecked} onChange={filterStops}/>}
                         label={value === '0' ? 'Non-Stop' : value === '1' ? `${value} stop` : `${value} stops`}
                         key={uuidv4()}/>)}
                 </FormGroup>
-            </CardContent>
         </Card>
     );
 };

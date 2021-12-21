@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {CardContent, Grid, Typography} from "@mui/material";
+import {Box, CardContent, Grid, Typography} from "@mui/material";
 import {ITicketSegment} from "../types/types";
 
 interface TicketSegmentProps {
@@ -12,20 +12,20 @@ const TicketContent: FC<TicketSegmentProps> = ({segment}) => {
         const departureDate = new Date(date)
         const hours = departureDate.getUTCHours()
         let minutes = Math.round(departureDate.getUTCMinutes() / 10) * 10
-        return `${hours}:${minutes}`
+        return `${hours < 10 ? '0' + hours : hours}:${minutes}`
     }
 
     const arrivingTime = (date: string, duration: number) => {
         const arrivingDate = new Date(Date.parse(date) + duration * 60 * 1000)
         const hours = arrivingDate.getUTCHours()
         let minutes = Math.round(arrivingDate.getUTCMinutes() / 10) * 10
-        return `${hours}:${minutes === 0 ? '00' : minutes}`
+        return `${hours < 10 ? '0' + hours : hours}:${minutes === 0 ? '00' : minutes}`
     }
 
     return (
-        <CardContent>
-            <Grid container justifyContent={'space-between'}>
-                <Grid item xs='auto'>
+        <Box className={'TicketContainer'}>
+            <Grid container className={'TicketContainer__Segment'}>
+                <Grid>
                     <Typography color="text.secondary" gutterBottom variant={'subtitle2'}
                                 sx={{fontSize: '12px', marginBottom: 0,}}>
                         {segment.origin} - {segment.destination}
@@ -34,17 +34,17 @@ const TicketContent: FC<TicketSegmentProps> = ({segment}) => {
                         {`${departureTime(segment.date)} - ${arrivingTime(segment.date, segment.duration)}`}
                     </Typography>
                 </Grid>
-                <Grid item xs='auto'>
+                <Grid>
                     <Typography color="text.secondary" gutterBottom sx={{fontSize: '12px', marginBottom: 0,}}>
                         DURATION
                     </Typography>
                     <Typography>
-                        {Math.floor(segment.duration / 60)} h {' '}
+                        {Math.floor(segment.duration / 60)}h {' '}
                         {Math.round((Math.round(((segment.duration / 60)
-                            - (Math.floor(segment.duration / 60))) * 60)) / 10) * 10} m
+                            - (Math.floor(segment.duration / 60))) * 60)) / 10) * 10}m
                     </Typography>
                 </Grid>
-                <Grid item xs='auto' alignSelf={'center'} textAlign={'center'}>
+                <Grid>
                     {segment.stops.length
                         ? <>
                             <Typography color="text.secondary" gutterBottom sx={{fontSize: '12px', marginBottom: 0,}}>
@@ -59,7 +59,7 @@ const TicketContent: FC<TicketSegmentProps> = ({segment}) => {
                         </Typography>}
                 </Grid>
             </Grid>
-        </CardContent>
+        </Box>
     );
 };
 

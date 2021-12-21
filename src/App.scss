@@ -28,20 +28,22 @@
 .TicketHeader {
   display: flex;
   justify-content: space-between;
-  padding-top: 24px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 24px 16px 16px 16px;
 
   color: #2196F3
 }
 
 .TicketContainer {
-  div:nth-child(1) {
-    font-size: 12px;
-  }
+  padding: 0 16px 16px 16px;
 
-  div:nth-child(2) {
-    font-size: 14px;
+  &__Segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div > * {
+      width: 155px;
+    }
   }
 }
 
@@ -56,3 +58,19 @@
     width: 144px;
   }
 }
+
+.Filter {
+  width: 200px;
+  height: 220px;
+  padding: 10px;
+
+  &__Title {
+    padding-bottom: 10px;
+    border-bottom: 1px black solid;
+  }
+
+  &__CheckBox {
+  }
+}
+
+
