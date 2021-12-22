@@ -56,6 +56,13 @@
 
   img {
     width: 144px;
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 

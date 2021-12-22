@@ -15,6 +15,7 @@ function App() {
     const [tickets, setTickets] = useState<ITicket[]>([])
     const [filteredList, setFilteredList] = useState<ITicket[]>([])
     const [openedTickets, setOpenedTickets] = useState<number>(5)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         const fetchData = async (data: any) => {
@@ -22,6 +23,7 @@ function App() {
                 const listData = await axios.get(`https://front-test.beta.aviasales.ru/tickets?searchId=${data.searchId}`)
                 setTickets(prevState => prevState.concat(listData.data.tickets))
                 setFilteredList(prevState => prevState.concat(listData.data.tickets))
+                if (listData.data.stop) setIsLoading(true)
                 if (!listData.data.stop) fetchData(data)
             } catch {
                 console.log('Server error')
@@ -51,7 +53,7 @@ function App() {
                 .reduce((sum, x) => sum + x.duration, 0))))
     }
 
-    if (!tickets.length) return <Loading/>
+    if (!isLoading) return <Loading/>
     return (
         <MainLayout>
             <CheckBoxFilter tickets={tickets} setFilteredList={setFilteredList}/>
