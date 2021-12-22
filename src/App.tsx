@@ -45,11 +45,13 @@ function App() {
     }
 
     const optimalSort = () => {
-        console.log('optimal')
+        setFilteredList([...filteredList]
+            .sort((a, b) => (a.price + a.segments
+                .reduce((sum, x) => sum + x.duration, 0)) - (b.price + b.segments
+                .reduce((sum, x) => sum + x.duration, 0))))
     }
 
     if (!tickets.length) return <Loading/>
-
     return (
         <MainLayout>
             <CheckBoxFilter tickets={tickets} setFilteredList={setFilteredList}/>
